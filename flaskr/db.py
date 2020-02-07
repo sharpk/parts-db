@@ -45,6 +45,20 @@ def init_db_command():
     init_db()
     click.echo("Initialized the database.")
 
+def import_db(importfile):
+    # Import database items from a .sql file
+    db = get_db()
+
+    with current_app.open_resource(importfile) as f:
+        db.executescript(f.read().decode("utf8"))
+
+@click.command("import-db")
+@click.argument("importfile")
+@with_appcontext
+def import_db_command(importfile):
+    """Import sql file"""
+    import_db(importfile)
+    click.echo("Importing to database from file " + importfile + ".")
 
 def init_app(app):
     """Register database functions with the Flask app. This is called by
@@ -52,3 +66,4 @@ def init_app(app):
     """
     app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)
+    app.cli.add_command(import_db_command)
