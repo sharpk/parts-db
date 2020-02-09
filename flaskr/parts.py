@@ -13,6 +13,11 @@ from flaskr.db import get_db
 bp = Blueprint("parts", __name__)
 
 
+@bp.route("/")
+def index():
+	"""Give the menu of choices"""
+	return render_template("parts/index.html")
+
 @bp.route("/browse")
 def browse():
     """Show all the posts, most recent first."""
