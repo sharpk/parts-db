@@ -10,7 +10,7 @@
 {% block content %}
   <table>
   <tr><th>Type</th><th>Class</th><th>Description</th><th>Quantity</th><th>Manufacturer</th><th>PartNum</th>
-    <th>Cost</th><th>Location</th><th>URL</th><th>Notes</th></tr>
+    <th>Cost</th><th>Location</th><th>Datasheet</th><th>Notes</th></tr>
   {% for part in parts %}
     <tr>
       <td>{{ part['type'] }}</td>
@@ -21,7 +21,11 @@
       <td>{{ part['partnum'] }}</td>
       <td>{{ part['cost'] }}</td>
       <td>{{ part['location'] }}</td>
-      <td>{{ part['url'] }}</td>
+      {% if part['url'] != "" %}
+        <td><a href={{ part['url'] }}>link</a></td>
+      {% else %}
+        <td></td>
+      {% endif %}
       <td>{{ part['notes'] }}</td>
     </tr>
   {% endfor %}
