@@ -1,0 +1,194 @@
+<hierarchy>
+  <child name="connector" id="0">
+    <child name="pin" id="22"/>
+	<child name="audio" id="23"/>
+	<child name="D type" id="24"/>
+	<child name="banana" id="25"/>
+	<child name="header" id="26"/>
+	<child name="socket" id="27"/>
+	<child name="FPC" id="28"/>
+	<child name="BNC" id="29"/>
+  </child>
+  <child name="resistor" id="1">
+	<child name="variable" id="30"/>
+	<child name="surface mount" id="31"/>
+	<child name="power" id="32"/>
+	<child name="network" id="159"/>
+	<child name="current sensing" id="33"/>
+  </child>
+  <child name="capacitor" id="2">
+    <child name="variable" id="34"/>
+	<child name="ceramic" id="35"/>
+	<child name="tantalum" id="36"/>
+	<child name="mylar" id="37"/>
+	<child name="electrolytic" id="38"/>
+  </child>
+  <child name="inductor" id="3">
+    <child name="audio" id="39"/>
+	<child name="RF choke" id="40"/>
+	<child name="coil" id="41"/>
+  </child>
+  <child name="diode" id="4">
+    <child name="zener" id="42"/>
+	<child name="general" id="43"/>
+  </child>
+  <child name="transistor" id="5">
+	<child name="JFET" id="44"/>
+	<child name="MOSFET" id="45">
+	  <child name="P channel" id="48"/>
+	  <child name="N channel" id="49"/>
+	</child>
+	<child name="BJT" id="46">
+	  <child name="NPN" id="50"/>
+	  <child name="PNP" id="51"/>
+	</child>
+	<child name="photo" id="47"/>
+  </child>
+  <child name="power" id="6">
+    <child name="wall wart" id="52"/>
+	<child name="solar cell" id="53"/>
+	<child name="battery" id="54">
+	  <child name="lead acid" id="55"/>
+	  <child name="lithium" id="56"/>
+	  <child name="alkaline" id="57"/>
+	  <child name="NiCad" id="58"/>
+	  <child name="NiMH" id="59"/>
+	  <child name="lithium polymer" id="60"/>
+	</child>
+  </child>
+  <child name="actuator" id="7">
+    <child name="motor" id="61">
+	  <child name="DC" id="63"/>
+	  <child name="AC" id="64"/>
+	  <child name="servo" id="65"/>
+	  <child name="stepper" id="66"/>
+	  <child name="fan" id="67"/>
+	  <child name="pump" id="68"/>
+	</child>
+	<child name="solenoid" id="62">
+	  <child name="valve" id="69"/>
+	</child>
+  </child>
+  <child name="board" id="8">
+    <child name="perf" id="70"/>
+	<child name="patterned" id="71"/>
+	<child name="copper clad" id="72"/>
+  </child>
+ <child name="enclosure" id="9">
+   <child name="plastic" id="73"/>
+   <child name="metal" id="74"/>
+ </child>
+ <child name="hardware" id="10">
+   <child name="screw" id="75"/>
+   <child name="nut" id="76"/>
+   <child name="washer" id="77"/>
+   <child name="bolt" id="78"/>
+   <child name="gear" id="79"/>
+   <child name="valve" id="80"/>
+   <child name="heatsink" id="81"/>
+   <child name="standoff" id="82"/>
+ </child>
+ <child name="wire" id="11">
+   <child name="hook up" id="83"/>
+   <child name="magnet" id="84"/>
+   <child name="cable" id="85"/>
+   <child name="nitinol" id="86"/>
+ </child>
+ <child name="sensor" id="12">
+   <child name="accelerometer" id="87"/>
+   <child name="angular" id="88"/>
+   <child name="temperature" id="89"/>
+   <child name="pressure" id="90"/>
+   <child name="humidity" id="91"/>
+   <child name="gas" id="92"/>
+   <child name="light" id="93"/>
+   <child name="infrared" id="94"/>
+   <child name="magnetic" id="95"/>
+   <child name="ultrasonic" id="96"/>
+   <child name="proximity" id="97"/>
+   <child name="image" id="98"/>
+ </child>
+ <child name="light" id="13">
+   <child name="LED" id="99"/>
+   <child name="incandescent" id="100"/>
+   <child name="LCD" id="101"/>
+ </child>
+ <child name="oscillator" id="14">
+   <child name="crystal" id="102"/>
+   <child name="resonator" id="103"/>
+ </child>
+ <child name="switch" id="15">
+   <child name="toggle" id="104"/>
+   <child name="button" id="105"/>
+   <child name="slide" id="106"/>
+   <child name="DIP" id="107"/>
+ </child>
+ <child name="transformer" id="16">
+   <child name="audio" id="108"/>
+   <child name="power" id="109"/>
+ </child>
+ <child name="IC" id="17">
+   <child name="processor" id="110"/>
+   <child name="PAL" id="111"/>
+   <child name="FPGA" id="112"/>
+   <child name="mux" id="113">
+     <child name="analog" id="133"/>
+	 <child name="digital" id="134"/>
+   </child>
+   <child name="demux" id="114">
+     <child name="analog" id="135"/>
+	 <child name="digital" id="136"/>
+   </child>
+   <child name="memory" id="115">
+     <child name="EEPROM" id="137"/>
+	 <child name="SRAM" id="138"/>
+   </child>
+   <child name="buffer" id="116">
+     <child name="inverting" id="139"/>
+	 <child name="non inverting" id="140"/>
+	 <child name="tri state" id="141"/>
+	 <child name="latch" id="142"/>
+	 <child name="RS232" id="143"/>
+	 <child name="opto isolator" id="144"/>
+   </child>
+   <child name="logic" id="117">
+     <child name="AND" id="145"/>
+	 <child name="NAND" id="146"/>
+	 <child name="OR" id="147"/>
+	 <child name="NOR" id="148"/>
+	 <child name="XOR" id="149"/>
+	 <child name="XNOR" id="150"/>
+	 <child name="flip flop" id="151"/>
+   </child>
+   <child name="RF" id="118"/>
+   <child name="shift register" id="119"/>
+   <child name="opamp" id="120"/>
+   <child name="encoder" id="121"/>
+   <child name="decoder" id="122"/>
+   <child name="comparator" id="123"/>
+   <child name="digital pot" id="124"/>
+   <child name="ADC" id="125"/>
+   <child name="DAC" id="126"/>
+   <child name="timer" id="127"/>
+   <child name="counter" id="128"/>
+   <child name="PLL" id="129"/>
+   <child name="voltage regulator" id="130"/>
+   <child name="voltage reference" id="131"/>
+   <child name="battery monitor" id="132"/>
+ </child>
+ <child name="assembly" id="18">
+   <child name="wireless" id="152"/>
+   <child name="motor driver" id="153"/>
+ </child>
+ <child name="magnet" id="19">
+   <child name="ferrite bead" id="154"/>
+   <child name="rare earth" id="155"/>
+ </child> 
+ <child name="material" id="20">
+   <child name="wood" id="156"/>
+   <child name="plastic" id="157"/>
+   <child name="metal" id="158"/>
+ </child>
+ <child name="misc" id="21">
+ </child>
+</hierarchy>
