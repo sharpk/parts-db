@@ -14,7 +14,7 @@
   {% for part in parts %}
     <tr>
       <td>{{ part['type'] }}</td>
-      <td>{{ part['class'] }}</td>
+      <td>{{ get_class_string(str_type(part['class'])) }}</td>
       <td>{{ part['description'] }}</td>
       <td>{{ part['qty'] }}</td>
       <td>{{ part['manuf'] }}</td>

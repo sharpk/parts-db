@@ -10,6 +10,8 @@ from werkzeug.exceptions import abort
 from flaskr.auth import login_required
 from flaskr.db import get_db
 
+from flaskr.classxml import parse_hierarchy_xml,get_class_string
+
 bp = Blueprint("parts", __name__)
 
 
@@ -27,7 +29,9 @@ def browse():
     parts = db.execute(
         "SELECT type, class, qty, pkg, manuf, partnum, cost, location, description, notes, url FROM " + tablename,
     ).fetchall()
-    return render_template("parts/browse.html", parts=parts)
+    # parse the class xml file before get_class_string is called in the template
+    parse_hierarchy_xml('./flaskr/static/class.xml')
+    return render_template("parts/browse.html", parts=parts, str_type=str, get_class_string=get_class_string)
 
 def get_post(id, check_author=True):
     """Get a post and its author by id.

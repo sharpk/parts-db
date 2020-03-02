@@ -24,7 +24,7 @@ def get_class_string(id):
 	name_list.reverse()
 	return_str = ""
 	for name in name_list:
-	  return_str = return_str + delimiter + name
+		return_str = return_str + delimiter + name
 	return return_str[1:]
 
 # get list of child id values for given id
