@@ -65,30 +65,43 @@ def get_post(id, check_author=True):
     return post
 
 
-@bp.route("/create", methods=("GET", "POST"))
+@bp.route("/add", methods=("GET", "POST"))
 @login_required
-def create():
-    """Create a new post for the current user."""
+def add():
+    """Add a new part for the current user."""
     if request.method == "POST":
-        title = request.form["title"]
-        body = request.form["body"]
+        ptype = request.form['type']
+        manuf = request.form['manuf']
+        partnum = request.form['partnum']
+        pkg = request.form['pkg']
+        description = request.form['description']
+        pclass = request.form['class']
+        qty = request.form['qty']
+        location = request.form['location']
+        cost = request.form['cost']
+        notes = request.form['notes']
+        url = request.form['url']
         error = None
 
-        if not title:
-            error = "Title is required."
+        if not ptype:
+            error = "Type is required."
+        if not qty:
+            error = "Quantity is required."
 
         if error is not None:
             flash(error)
         else:
             db = get_db()
+            tablename = "parts"+g.user['username']
             db.execute(
-                "INSERT INTO post (title, body, author_id) VALUES (?, ?, ?)",
-                (title, body, g.user["id"]),
+                "INSERT INTO " + tablename +" (type, class, qty, pkg, manuf, partnum, cost, location, description, notes, url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                (ptype, pclass, qty, pkg, manuf, partnum, cost, location, description, notes, url),
             )
             db.commit()
+            flash("New part added to database.")
             return redirect(url_for("parts.browse"))
 
-    return render_template("blog/create.html")
+    return render_template("parts/add.html")
 
 
 @bp.route("/<int:id>/update", methods=("GET", "POST"))

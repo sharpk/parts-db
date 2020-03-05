@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}New Part{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="type">Part Name</label>
+    <input type='text' name='type' id='type' value="{{ request.form['type'] }}" required>
+    <label for="manuf">Manufacturer</label>
+    <input type='text' name='manuf' id='manuf' value="{{ request.form['manuf'] }}">
+    <label for="partnum">Manufacturer Part Number</label>
+    <input type='text' name='partnum' id='partnum' value="{{ request.form['partnum'] }}">
+    <label for="pkg">Package</label>
+    <input type='text' name='pkg' id='pkg' value="{{ request.form['pkg'] }}">
+    <label for="description">Description</label>
+    <textarea name='description' id="description">{{ request.form['description'] }}</textarea>
+    <label for="class">Classification</label>
+    <select name='class' id='class'>
+      <option value='-1'>Don't Care</option>
+<!--     foreach ($classArray as $key => $value){
+       $sel = ($class == $key)?" selected='selected'":"";
+       <option value='$key'{$sel}>$value</option>
+     }   -->
+    </select>
+    <label for="qty">Quantity</label>
+    <input type='text' name='qty' id='qty' value="{{ request.form['qty'] }}" required>
+    <label for="location">Location</label>
+    <input type='text' name='location' id='location' value="{{ request.form['location'] }}">
+	<label for="cost">Cost</label>
+    <input type='text' name='cost' id='cost' value="{{ request.form['cost'] }}">
+    <label for="notes">Notes</label>
+    <textarea name='notes' id='notes' />{{ request.form['notes'] }}</textarea>
+<!--      if ($url == "")  -->
+	<label for="url">Datasheet</label>
+<!--	  else
+	    datasheet(<a href="$url" target=\"_blank\">Link</a>):<br />  -->
+    <textarea name='url' id='url' />{{ request.form['url'] }}</textarea>
+    <input type="submit" value="Save">
+  </form>
+{% endblock %}

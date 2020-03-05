@@ -14,7 +14,7 @@ $(document).ready(function() {
 {% block header %}
   <h1>{% block title %}Parts{% endblock %}</h1>
   {% if g.user %}
-    <a class="action" href="{{ url_for('parts.create') }}">New</a>
+    <a class="action" href="{{ url_for('parts.add') }}">New</a>
   {% endif %}
 {% endblock %}
 
