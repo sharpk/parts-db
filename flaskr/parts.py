@@ -10,7 +10,7 @@ from werkzeug.exceptions import abort
 from flaskr.auth import login_required
 from flaskr.db import get_db
 
-from flaskr.classxml import parse_hierarchy_xml,get_class_string
+from flaskr.classxml import parse_hierarchy_xml,get_class_string,get_linear_class_list
 
 bp = Blueprint("parts", __name__)
 
@@ -101,7 +101,9 @@ def add():
             flash("New part added to database.")
             return redirect(url_for("parts.browse"))
 
-    return render_template("parts/add.html")
+    parse_hierarchy_xml('./flaskr/static/class.xml')
+    class_list = get_linear_class_list()
+    return render_template("parts/add.html", class_list=class_list)
 
 
 @bp.route("/<int:id>/update", methods=("GET", "POST"))

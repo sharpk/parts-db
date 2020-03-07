@@ -18,11 +18,9 @@
     <textarea name='description' id="description">{{ request.form['description'] }}</textarea>
     <label for="class">Classification</label>
     <select name='class' id='class'>
-      <option value='-1'>Don't Care</option>
-<!--     foreach ($classArray as $key => $value){
-       $sel = ($class == $key)?" selected='selected'":"";
-       <option value='$key'{$sel}>$value</option>
-     }   -->
+    {% for xclass in class_list %}
+      <option value='{{ xclass[0] }}'>{{ xclass[1] }}</option>
+    {% endfor %}
     </select>
     <label for="qty">Quantity</label>
     <input type='text' name='qty' id='qty' value="{{ request.form['qty'] }}" required>

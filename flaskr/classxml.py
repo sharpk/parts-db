@@ -36,3 +36,11 @@ def get_class_children(id):
 		for child in start_class.iter('child'):
 			id_list.append(child.attrib['id'])
 	return id_list
+
+# get a sorted list of tuples which contains the id followed by the 
+# class string. Sorted by the class string
+def get_linear_class_list():
+	d = dict()
+	for child in root.iter('child'):
+		d[int(child.attrib['id'])] = get_class_string(child.attrib['id'])
+	return sorted(d.items(), key=lambda kv: kv[1])
