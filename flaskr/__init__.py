@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask
+from flask import Flask, send_from_directory
 
 
 def create_app(test_config=None):
@@ -49,5 +49,10 @@ def create_app(test_config=None):
     @app.route("/")
     def index():
         return "Hello"
+
+    # Serve up static directory contents for datasheets
+    @app.route('/data/<path:path>')
+    def send_datasheet(path):
+        return send_from_directory('data', path)
 
     return app
