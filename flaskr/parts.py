@@ -27,42 +27,37 @@ def browse():
     db = get_db()
     tablename = "parts"+g.user['username']
     parts = db.execute(
-        "SELECT type, class, qty, pkg, manuf, partnum, cost, location, description, notes, url FROM " + tablename,
+        "SELECT id, type, class, qty, pkg, manuf, partnum, cost, location, description, notes, url FROM " + tablename,
     ).fetchall()
     # parse the class xml file before get_class_string is called in the template
     parse_hierarchy_xml('./flaskr/static/class.xml')
     return render_template("parts/browse.html", parts=parts, str_type=str, get_class_string=get_class_string)
 
-def get_post(id, check_author=True):
-    """Get a post and its author by id.
+def get_part(id):
+    """Get a part by id.
 
     Checks that the id exists and optionally that the current user is
     the author.
 
-    :param id: id of post to get
-    :param check_author: require the current user to be the author
-    :return: the post with author information
-    :raise 404: if a post with the given id doesn't exist
-    :raise 403: if the current user isn't the author
+    :param id: id of part to get
+    :return: the part
+    :raise 404: if a part with the given id doesn't exist
     """
-    post = (
+    tablename = "parts"+g.user['username']
+    part = (
         get_db()
         .execute(
-            "SELECT p.id, title, body, created, author_id, username"
-            " FROM post p JOIN user u ON p.author_id = u.id"
-            " WHERE p.id = ?",
+            "SELECT id, type, class, qty, pkg, manuf, partnum, cost, location, description, notes, url"
+            " FROM " + tablename + " WHERE id = ?",
             (id,),
         )
         .fetchone()
     )
 
-    if post is None:
-        abort(404, "Post id {0} doesn't exist.".format(id))
+    if part is None:
+        abort(404, "Part id {0} doesn't exist.".format(id))
 
-    if check_author and post["author_id"] != g.user["id"]:
-        abort(403)
-
-    return post
+    return part
 
 
 @bp.route("/add", methods=("GET", "POST"))
@@ -109,29 +104,42 @@ def add():
 @bp.route("/<int:id>/update", methods=("GET", "POST"))
 @login_required
 def update(id):
-    """Update a post if the current user is the author."""
-    post = get_post(id)
+    part = get_part(id)
 
     if request.method == "POST":
-        title = request.form["title"]
-        body = request.form["body"]
+        ptype = request.form['type']
+        manuf = request.form['manuf']
+        partnum = request.form['partnum']
+        pkg = request.form['pkg']
+        description = request.form['description']
+        pclass = request.form['class']
+        qty = request.form['qty']
+        location = request.form['location']
+        cost = request.form['cost']
+        notes = request.form['notes']
+        url = request.form['url']
         error = None
 
-        if not title:
-            error = "Title is required."
+        if not ptype:
+            error = "Type is required."
+        if not qty:
+            error = "Quantity is required."
 
         if error is not None:
             flash(error)
         else:
             db = get_db()
+            tablename = "parts"+g.user['username']
             db.execute(
-                "UPDATE post SET title = ?, body = ? WHERE id = ?", (title, body, id)
+                "UPDATE " + tablename + " SET type = ?, class = ?, qty = ?, pkg = ?, manuf = ?, partnum = ?, cost = ?, location = ?, description = ?, notes = ?, url = ? WHERE id = ?", 
+                (ptype, pclass, qty, pkg, manuf, partnum, cost, location, description, notes, url, id)
             )
             db.commit()
             return redirect(url_for("parts.browse"))
 
-    return render_template("blog/update.html", post=post)
-
+    parse_hierarchy_xml('./flaskr/static/class.xml')
+    class_list = get_linear_class_list()
+    return render_template("parts/update.html", part=part, class_list=class_list)
 
 @bp.route("/<int:id>/delete", methods=("POST",))
 @login_required

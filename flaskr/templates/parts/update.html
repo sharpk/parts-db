@@ -1,19 +1,48 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Edit "{{ post['title'] }}"{% endblock %}</h1>
+  <h1>{% block title %}Edit "{{ part['type'] }}"{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
   <form method="post">
-    <label for="title">Title</label>
-    <input name="title" id="title" value="{{ request.form['title'] or post['title'] }}" required>
-    <label for="body">Body</label>
-    <textarea name="body" id="body">{{ request.form['body'] or post['body'] }}</textarea>
+    <label for="type">Part Name</label>
+    <input type='text' name='type' id='type' value="{{ request.form['type'] or part['type'] }}" required>
+    <label for="manuf">Manufacturer</label>
+    <input type='text' name='manuf' id='manuf' value="{{ request.form['manuf'] or part['manuf'] }}">
+    <label for="partnum">Manufacturer Part Number</label>
+    <input type='text' name='partnum' id='partnum' value="{{ request.form['partnum'] or part['partnum'] }}">
+    <label for="pkg">Package</label>
+    <input type='text' name='pkg' id='pkg' value="{{ request.form['pkg'] or part['pkg'] }}">
+    <label for="description">Description</label>
+    <textarea name='description' id="description">{{ request.form['description'] or part['description'] }}</textarea>
+    <label for="class">Classification</label>
+    <select name='class' id='class'>
+    {% for xclass in class_list %}
+      {% if xclass[0] == part['class'] %}
+        <option value='{{ xclass[0] }}' selected>{{ xclass[1] }}</option>
+      {% else %}
+        <option value='{{ xclass[0] }}'>{{ xclass[1] }}</option>
+      {% endif %}
+    {% endfor %}
+    </select>
+    <label for="qty">Quantity</label>
+    <input type='text' name='qty' id='qty' value="{{ request.form['qty'] or part['qty'] }}" required>
+    <label for="location">Location</label>
+    <input type='text' name='location' id='location' value="{{ request.form['location'] or part['location'] }}">
+	<label for="cost">Cost</label>
+    <input type='text' name='cost' id='cost' value="{{ request.form['cost'] or part['cost'] }}">
+    <label for="notes">Notes</label>
+    <textarea name='notes' id='notes' />{{ request.form['notes'] or part['notes'] }}</textarea>
+<!--      if ($url == "")  -->
+	<label for="url">Datasheet</label>
+<!--	  else
+	    datasheet(<a href="$url" target=\"_blank\">Link</a>):<br />  -->
+    <textarea name='url' id='url' />{{ request.form['url'] or part['url'] }}</textarea>
     <input type="submit" value="Save">
   </form>
   <hr>
-  <form action="{{ url_for('blog.delete', id=post['id']) }}" method="post">
+  <form action="{{ url_for('parts.delete', id=part['id']) }}" method="post">
     <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
   </form>
 {% endblock %}

@@ -21,12 +21,13 @@ $(document).ready(function() {
 {% block content %}
   <table id="example" class="display" style="width:100%">
   <thead>
-  <tr><th>Type</th><th>Class</th><th>Description</th><th>Quantity</th><th>Manufacturer</th><th>PartNum</th>
+  <tr><th>Actions</th><th>Type</th><th>Class</th><th>Description</th><th>Quantity</th><th>Manufacturer</th><th>PartNum</th>
     <th>Cost</th><th>Location</th><th>Datasheet</th><th>Notes</th></tr>
   </thead>
   <tbody>
   {% for part in parts %}
     <tr>
+	  <td><a href="{{ url_for('parts.update', id=part['id']) }}">E</a></td>
       <td>{{ part['type'] }}</td>
       <td>{{ get_class_string(str_type(part['class'])) }}</td>
       <td>{{ part['description'] }}</td>
