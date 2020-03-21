@@ -149,8 +149,9 @@ def delete(id):
     Ensures that the post exists and that the logged in user is the
     author of the post.
     """
-    get_post(id)
+    get_part(id)
     db = get_db()
-    db.execute("DELETE FROM post WHERE id = ?", (id,))
+    tablename = "parts"+g.user['username']
+    db.execute("DELETE FROM " + tablename + " WHERE id = ?", (id,))
     db.commit()
     return redirect(url_for("parts.browse"))
