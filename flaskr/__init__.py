@@ -2,7 +2,6 @@ import os
 
 from flask import Flask, send_from_directory
 
-
 def create_app(test_config=None):
     """Create and configure an instance of the Flask application."""
     app = Flask(__name__, instance_relative_config=True)
@@ -11,6 +10,8 @@ def create_app(test_config=None):
         SECRET_KEY="dev",
         # store the database in the instance folder
         DATABASE=os.path.join(app.instance_path, "parts.sqlite"),
+        DATA_DIR=os.path.join(app.root_path, 'data'),
+        UPLOAD_DIR=os.path.join(app.instance_path,'uploads')
     )
 
     if test_config is None:
@@ -20,9 +21,19 @@ def create_app(test_config=None):
         # load the test config if passed in
         app.config.update(test_config)
 
-    # ensure the instance folder exists
+    # ensure the various directories exists
     try:
         os.makedirs(app.instance_path)
+    except OSError:
+        pass
+
+    try:
+        os.makedirs(app.config['DATA_DIR'])
+    except OSError:
+        pass
+
+    try:
+        os.makedirs(app.config['UPLOAD_DIR'])
     except OSError:
         pass
 

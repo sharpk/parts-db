@@ -5,7 +5,11 @@ from flask import redirect
 from flask import render_template
 from flask import request
 from flask import url_for
+from flask import current_app
 from werkzeug.exceptions import abort
+
+import os
+import shutil
 
 from flaskr.auth import login_required
 from flaskr.db import get_db
@@ -118,6 +122,10 @@ def update(id):
         cost = request.form['cost']
         notes = request.form['notes']
         url = request.form['url']
+        if 'datafile' in request.files:
+            datafile = request.files['datafile']
+        else:
+            datafile = None
         error = None
 
         if not ptype:
@@ -128,6 +136,13 @@ def update(id):
         if error is not None:
             flash(error)
         else:
+            if datafile and datafile.filename != '':
+                # copy datasheet to data directory and set URL to resulting location
+                src = os.path.join(current_app.config["UPLOAD_DIR"], datafile.filename)
+                dest = os.path.join(current_app.config["DATA_DIR"], datafile.filename)
+                datafile.save(src)
+                shutil.move(src, dest)
+                url = url_for('send_datasheet', path=datafile.filename)
             db = get_db()
             tablename = "parts"+g.user['username']
             db.execute(

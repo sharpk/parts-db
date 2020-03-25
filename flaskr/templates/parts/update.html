@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-  <form method="post">
+  <form method="post" enctype="multipart/form-data">
     <label for="type">Part Name</label>
     <input type='text' name='type' id='type' value="{{ request.form['type'] or part['type'] }}" required>
     <label for="manuf">Manufacturer</label>
@@ -34,11 +34,11 @@
     <input type='text' name='cost' id='cost' value="{{ request.form['cost'] or part['cost'] }}">
     <label for="notes">Notes</label>
     <textarea name='notes' id='notes' />{{ request.form['notes'] or part['notes'] }}</textarea>
-<!--      if ($url == "")  -->
-	<label for="url">Datasheet</label>
-<!--	  else
-	    datasheet(<a href="$url" target=\"_blank\">Link</a>):<br />  -->
+	<label for="url">Datasheet URL</label>
+<!-- datasheet(<a href="$url" target=\"_blank\">Link</a>):<br />  -->
     <textarea name='url' id='url' />{{ request.form['url'] or part['url'] }}</textarea>
+    <label for='datafile'>OR Upload Datasheet</label>
+    <input type=file name='datafile' id='datafile'>
     <input type="submit" value="Save">
   </form>
   <hr>
