@@ -37,7 +37,7 @@ $(document).ready(function() {
       <td>{{ part['cost'] }}</td>
       <td>{{ part['location'] }}</td>
       {% if part['url'] != "" %}
-        <td><a href={{ part['url'] }}>link</a></td>
+        <td><a href={{ part['url'] }} target="_blank">link</a></td>
       {% else %}
         <td></td>
       {% endif %}
