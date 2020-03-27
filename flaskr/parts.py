@@ -140,9 +140,12 @@ def update(id):
                 # copy datasheet to data directory and set URL to resulting location
                 src = os.path.join(current_app.config["UPLOAD_DIR"], datafile.filename)
                 dest = os.path.join(current_app.config["DATA_DIR"], datafile.filename)
-                datafile.save(src)
-                shutil.move(src, dest)
-                url = url_for('send_datasheet', path=datafile.filename)
+                try:
+                    datafile.save(src)
+                    shutil.move(src, dest)
+                    url = url_for('send_datasheet', path=datafile.filename)
+                except OSError:
+                    flash("File operation failed")
             db = get_db()
             tablename = "parts"+g.user['username']
             db.execute(
