@@ -11,7 +11,10 @@
   <br>
   <a class="action" href="{{ url_for('parts.add')  }}">New Part</a>
   <br>
-  <a class="action" href="{{ url_for('parts.browse')  }}">Browse Parts</a>
+  <a class="action" href="{{ url_for('parts.browse')  }}">Browse or Search Parts</a>
   <br>
-  <div class="about">Search (placeholder)</div>
+  <br>
+  <div><b>Summary</b></div>
+  <div>{{ summary['total_num'] }} total parts in the database</div>
+  <div>${{ summary['total_value'] }} total value in the database</div>
 {% endblock %}

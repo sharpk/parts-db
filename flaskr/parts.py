@@ -21,8 +21,23 @@ bp = Blueprint("parts", __name__)
 
 @bp.route("/")
 def index():
-	"""Give the menu of choices"""
-	return render_template("parts/index.html")
+    """Give the menu of choices"""
+    # Gather summary statistics
+    db = get_db()
+    tablename = "parts"+g.user['username']
+    parts = db.execute(
+        "SELECT qty, cost FROM " + tablename,
+    ).fetchall()
+    summary = dict()
+    num = 0
+    value = 0.0
+    for part in parts:
+        num = num + int(part['qty'])
+        if len(part['cost']) > 0:
+            value = value + (part['qty'] * float(part['cost']))
+    summary['total_num'] = str(num)
+    summary['total_value'] = '%.2f' % value
+    return render_template("parts/index.html", summary=summary)
 
 @bp.route("/browse")
 @login_required
