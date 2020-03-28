@@ -18,6 +18,7 @@ from flaskr.classxml import parse_hierarchy_xml,get_class_string,get_linear_clas
 
 bp = Blueprint("parts", __name__)
 
+lastsearch = ''
 
 @bp.route("/")
 def index():
@@ -43,6 +44,10 @@ def index():
 @login_required
 def browse():
     """Show all the posts, most recent first."""
+    if 'search' in request.args:
+        searchstr = request.args['search']
+    else:
+        searchstr = lastsearch
     db = get_db()
     tablename = "parts"+g.user['username']
     parts = db.execute(
@@ -50,7 +55,7 @@ def browse():
     ).fetchall()
     # parse the class xml file before get_class_string is called in the template
     parse_hierarchy_xml('./flaskr/static/class.xml')
-    return render_template("parts/browse.html", parts=parts, str_type=str, get_class_string=get_class_string)
+    return render_template("parts/browse.html", parts=parts, str_type=str, get_class_string=get_class_string, lastsearch=searchstr)
 
 def get_part(id):
     """Get a part by id.
@@ -113,7 +118,7 @@ def add():
             )
             db.commit()
             flash("New part added to database.")
-            return redirect(url_for("parts.browse"))
+            return redirect(url_for("parts.browse"), search='')
 
     parse_hierarchy_xml('./flaskr/static/class.xml')
     class_list = get_linear_class_list()
@@ -188,3 +193,10 @@ def delete(id):
     db.execute("DELETE FROM " + tablename + " WHERE id = ?", (id,))
     db.commit()
     return redirect(url_for("parts.browse"))
+
+@bp.route('/search/<search_str>', methods = ['GET'])
+def post_search(search_str):
+    global lastsearch
+    lastsearch = search_str
+    print("post_search: received " + search_str)
+    return lastsearch

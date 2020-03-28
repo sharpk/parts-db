@@ -5,9 +5,17 @@
   <script type="text/javascript" language="javascript" src="{{ url_for('static', filename='jquery-3.3.1.js') }}"></script>
   <script type="text/javascript" language="javascript" src="{{ url_for('static', filename='jquery.dataTables.min.js') }}"></script>
   <script type="text/javascript" class="init">
+var table;
 $(document).ready(function() {
-	$('#example').DataTable();
-} );
+	table = $('#example').DataTable();
+	$('#example').on( 'search.dt', function () {
+       var search = table.search();
+       $.get( "/search/" + search );
+    });
+  {% if lastsearch %}
+	table.search('{{ lastsearch }}').draw();
+  {% endif %}
+});
   </script>
 {% endblock %}
 
