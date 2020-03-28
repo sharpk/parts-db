@@ -65,5 +65,11 @@ def create_app(test_config=None):
     @app.route('/data/<path:path>')
     def send_datasheet(path):
         return send_from_directory('data', path)
+        
+    # Serve up static directory contents for images
+    # mostly to serve static images for JQuery datatables plugin
+    @app.route('/images/<path:path>')
+    def static_images(path):
+        return send_from_directory(os.path.join('static', 'images'), path)
 
     return app
