@@ -35,7 +35,7 @@ $(document).ready(function() {
   <tbody>
   {% for part in parts %}
     <tr>
-	  <td><a href="{{ url_for('parts.update', id=part['id']) }}">E</a></td>
+	  <td><a href="{{ url_for('parts.update', id=part['id']) }}"><img src="/images/edit24.png"></a></td>
       <td>{{ part['type'] }}</td>
       <td>{{ get_class_string(str_type(part['class'])) }}</td>
       <td>{{ part['description'] }}</td>
