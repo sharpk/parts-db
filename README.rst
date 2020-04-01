@@ -1,4 +1,4 @@
-Flaskr
+Partridge
 ======
 
 The basic blog app built in the Flask `tutorial`_.
@@ -31,12 +31,12 @@ Or on Windows cmd::
     $ py -3 -m venv venv
     $ venv\Scripts\activate.bat
 
-Install Flaskr::
+Install Partridge::
 
     $ pip install -e .
 
 Or if you are using the master branch, install Flask from source before
-installing Flaskr::
+installing Partridge::
 
     $ pip install -e ../..
     $ pip install -e .
@@ -47,14 +47,14 @@ Run
 
 ::
 
-    $ export FLASK_APP=flaskr
+    $ export FLASK_APP=partridge
     $ export FLASK_ENV=development
     $ flask init-db
     $ flask run
 
 Or on Windows cmd::
 
-    > set FLASK_APP=flaskr
+    > set FLASK_APP=partridge
     > set FLASK_ENV=development
     > flask init-db
     > flask run

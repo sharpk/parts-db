@@ -11,10 +11,10 @@ from werkzeug.exceptions import abort
 import os
 import shutil
 
-from flaskr.auth import login_required
-from flaskr.db import get_db
+from partridge.auth import login_required
+from partridge.db import get_db
 
-from flaskr.classxml import parse_hierarchy_xml,get_class_string,get_linear_class_list
+from partridge.classxml import parse_hierarchy_xml,get_class_string,get_linear_class_list
 
 bp = Blueprint("parts", __name__)
 
@@ -54,7 +54,7 @@ def browse():
         "SELECT id, type, class, qty, pkg, manuf, partnum, cost, location, description, notes, url FROM " + tablename,
     ).fetchall()
     # parse the class xml file before get_class_string is called in the template
-    parse_hierarchy_xml('./flaskr/static/class.xml')
+    parse_hierarchy_xml('./partridge/static/class.xml')
     return render_template("parts/browse.html", parts=parts, str_type=str, get_class_string=get_class_string, lastsearch=searchstr)
 
 def get_part(id):
@@ -120,7 +120,7 @@ def add():
             flash("New part added to database.")
             return redirect(url_for("parts.browse"), search='')
 
-    parse_hierarchy_xml('./flaskr/static/class.xml')
+    parse_hierarchy_xml('./partridge/static/class.xml')
     class_list = get_linear_class_list()
     return render_template("parts/add.html", class_list=class_list)
 
@@ -175,7 +175,7 @@ def update(id):
             db.commit()
             return redirect(url_for("parts.browse"))
 
-    parse_hierarchy_xml('./flaskr/static/class.xml')
+    parse_hierarchy_xml('./partridge/static/class.xml')
     class_list = get_linear_class_list()
     return render_template("parts/update.html", part=part, class_list=class_list)
 

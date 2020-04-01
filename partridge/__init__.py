@@ -42,12 +42,12 @@ def create_app(test_config=None):
         return "Hello, World!"
 
     # register the database commands
-    from flaskr import db
+    from partridge import db
 
     db.init_app(app)
 
     # apply the blueprints to the app
-    from flaskr import auth, parts
+    from partridge import auth, parts
 
     app.register_blueprint(auth.bp)
     app.register_blueprint(parts.bp)
