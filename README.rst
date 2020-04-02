@@ -1,7 +1,9 @@
 Partridge
 ======
 
-The basic blog app built in the Flask `tutorial`_.
+A basic electronic parts database.
+
+This project is based on the Flaskr blog app built in the Flask `tutorial`_.
 
 .. _tutorial: https://flask.palletsprojects.com/tutorial/
 
@@ -9,17 +11,11 @@ The basic blog app built in the Flask `tutorial`_.
 Install
 -------
 
-**Be sure to use the same version of the code as the version of the docs
-you're reading.** You probably want the latest tagged version, but the
-default Git version is the master branch. ::
+::
 
     # clone the repository
-    $ git clone https://github.com/pallets/flask
-    $ cd flask
-    # checkout the correct version
-    $ git tag  # shows the tagged versions
-    $ git checkout latest-tag-found-above
-    $ cd examples/tutorial
+    $ git clone https://github.com/sharpk/parts-db
+    $ cd parts-db
 
 Create a virtualenv and activate it::
 
@@ -61,6 +57,12 @@ Or on Windows cmd::
 
 Open http://127.0.0.1:5000 in a browser.
 
+Import Database
+---------------
+
+Run the following command on a .sql file that has a format matching partridge/schema.sql
+
+    > flask import-db <sql-file>
 
 Test
 ----
