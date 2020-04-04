@@ -21,6 +21,7 @@ bp = Blueprint("parts", __name__)
 lastsearch = ''
 
 @bp.route("/")
+@login_required
 def index():
     """Give the menu of choices"""
     # Gather summary statistics
