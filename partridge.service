@@ -1,0 +1,15 @@
+[Unit]
+Description=Partridge web application
+After=network.target
+
+[Service]
+User=someuser
+WorkingDirectory=/path/to/parts-db
+Environment=FLASK_APP=partridge
+Environment=FLASK_ENV=development
+ExecStart=/path/to/parts-db/venv/bin/flask run --host 0.0.0.0
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
