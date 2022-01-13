@@ -1,6 +1,7 @@
 partridge/data/
 hold/
 venv/
+parts-db*.tar.gz
 *.pyc
 __pycache__/
 instance/
