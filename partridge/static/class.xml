@@ -179,6 +179,9 @@
  <child name="assembly" id="18">
    <child name="wireless" id="152"/>
    <child name="motor driver" id="153"/>
+   <child name="dev board" id="160"/>
+   <child name="breakout" id="161"/>
+   <child name="shield" id="162"/>
  </child>
  <child name="magnet" id="19">
    <child name="ferrite bead" id="154"/>
@@ -190,5 +193,10 @@
    <child name="metal" id="158"/>
  </child>
  <child name="misc" id="21">
+ </child>
+ <child name="transducer" id="163">
+   <child name="piezo" id="164"/>
+   <child name="speaker" id="165"/>
+   <child name="ultrasonic" id="166"/>
  </child>
 </hierarchy>
