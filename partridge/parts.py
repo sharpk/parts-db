@@ -119,7 +119,7 @@ def add():
             )
             db.commit()
             flash("New part added to database.")
-            return redirect(url_for("parts.browse"), search='')
+            return redirect(url_for("parts.browse"))
 
     parse_hierarchy_xml('./partridge/static/class.xml')
     class_list = get_linear_class_list()
